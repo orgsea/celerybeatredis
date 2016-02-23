@@ -119,7 +119,7 @@ class PeriodicTask(object):
         tasks = rdb.keys(key_prefix + '*')
         for task_key in tasks:
             try:
-                dct = json.loads(bytes_to_str(rdb.get(task_key)), cls=DateTimeDecoder, encoding=default_encoding)
+                dct = json.loads(bytes_to_str(rdb.get(bytes_to_str(task_key))), cls=DateTimeDecoder, encoding=default_encoding)
                 # task name should always correspond to the key in redis to avoid
                 # issues arising when saving keys - we want to add information to
                 # the current key, not create a new key
